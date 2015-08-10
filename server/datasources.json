@@ -1,0 +1,12 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "sqlite3": {
+    "name": "sqlite3",
+    "connector": "sqlite",
+    "file_name": "coffeeshop.db",
+    "debug": false
+  }
+}
