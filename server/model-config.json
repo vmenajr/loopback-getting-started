@@ -35,5 +35,17 @@
   "CoffeeShop": {
     "dataSource": "sqlite3",
     "public": true
+  },
+  "Node": {
+    "dataSource": "sqlite3",
+    "public": true
+  },
+  "Service": {
+    "dataSource": "sqlite3",
+    "public": true
+  },
+  "Link": {
+    "dataSource": "sqlite3",
+    "public": true
   }
 }

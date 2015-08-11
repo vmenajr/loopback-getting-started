@@ -1,15 +1,40 @@
 module.exports = function(app) {
-  app.dataSources.sqlite3.automigrate('CoffeeShop', function(err) {
+  app.dataSources.sqlite3.automigrate('Node', function(err) {
     if (err) throw err;
- 
-    app.models.CoffeeShop.create([
-      {name: 'Bel Cafe', city: 'Vancouver'},
-      {name: 'Three Bees Coffee House', city: 'San Mateo'},
-      {name: 'Caffe Artigiano', city: 'Vancouver'},
-    ], function(err, coffeeShops) {
+
+    app.models.Node.create([
+      {Name: 'First'},
+      {Name: 'Second'},
+      {Name: 'Third'},
+    ], function(err, nodes) {
       if (err) throw err;
- 
-      console.log('Models created: \n', coffeeShops);
+
+      console.log('Models created: \n', nodes);
+    });
+  });
+  app.dataSources.sqlite3.automigrate('Service', function(err) {
+    if (err) throw err;
+
+    app.models.Service.create([
+      {Name: 'SSH', Port: 22},
+      {Name: 'HTTP', Port: 80},
+      {Name: 'HTTPS', Port: 443},
+    ], function(err, services) {
+      if (err) throw err;
+
+      console.log('Models created: \n', services);
+    });
+  });
+  app.dataSources.sqlite3.automigrate('Link', function(err) {
+    if (err) throw err;
+
+    app.models.Link.create([
+      {Name: 'A', Source: 1, Target: 2},
+      {Name: 'B', Source: 1, Target: 3},
+    ], function(err, links) {
+      if (err) throw err;
+
+      console.log('Models created: \n', links);
     });
   });
 };

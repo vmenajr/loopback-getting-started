@@ -1,14 +1,62 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Directed Graph Editor</title>
-    <link rel="stylesheet" href="app.css">
-  </head>
+<!doctype html>
+<meta charset="utf-8">
 
-  <body>
-  </body>
+<!-- load D3js -->
+<script src="d3.v3.min.js"></script>
 
-  <script src="d3.v3.min.js"></script>
-  <script src="app.js"></script>
-</html>
+<!-- load D3plus after D3js -->
+<script src="d3plus.min.js"></script>
+
+<!-- create container element for visualization -->
+<div id="viz"></div>
+
+<script>
+
+  // create sample dataset
+  var sample_data = [
+    {"name": "First", "size": 10},
+    {"name": "Second", "size": 10},
+    {"name": "Third", "size": 10}
+  ]
+
+  // create list of node positions
+  var positions = [
+    {"name": "alpha", "x": 10, "y": 15},
+    {"name": "beta", "x": 12, "y": 24},
+    {"name": "gamma", "x": 16, "y": 18},
+    {"name": "delta", "x": 26, "y": 21},
+    {"name": "epsilon", "x": 13, "y": 4},
+    {"name": "zeta", "x": 31, "y": 13},
+    {"name": "theta", "x": 19, "y": 8},
+    {"name": "eta", "x": 24, "y": 11}
+  ]
+
+  // create list of node connections
+  var connections = [
+    {"source": "First", "target": "Second"},
+    {"source": "First", "target": "Third"},
+  ]
+
+  function fetchNodes(data) {
+    nodes=[]
+    data.forEach(function(node,idx) {
+      nodes[idx]={"name":node.Name, "x": idx*10, "y": idx*10+10}
+    })
+    console.info(nodes)
+    return nodes
+  }
+
+  // instantiate d3plus
+  var visualization = d3plus.viz()
+    .dev(true)
+    .container("#viz")  // container DIV to hold the visualization
+    .type("network")    // visualization type
+    .data(sample_data)  // sample dataset to attach to nodes
+    .nodes("http://10.211.55.7:3000/api/nodes", fetchNodes)   // x and y position of nodes
+    .edges(connections) // list of node connections
+    .size("size")       // key to size the nodes
+    .id("name")         // key for which our data is unique on
+    .shape("square")
+    .draw()             // finally, draw the visualization!
+
+</script>
